@@ -1,0 +1,48 @@
+<?php
+
+include('config/db.php');
+include('classes/DB.php');
+include('classes/Country.php');
+include('classes/Template.php');
+
+$country = new Country($DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
+$country->open();
+$country->getCountry();
+
+if (isset($_POST['btn-add'])) {
+    if ($country->addCountry($_POST, $_FILES) > 0) {
+        echo "<script>
+            alert('Data berhasil ditambah!');
+            document.location.href = 'tambahCountry.php';
+        </script>";
+    } else {
+        echo "<script>
+            alert('Data gagal ditambah!');
+            document.location.href = 'tambahCountry.php';
+        </script>";
+    }
+}
+
+$view = new Template('templates/skinform.html');
+
+$mainTitle = 'Tambah Country';
+
+$form = '<div class="col gx-2 gy-3 justify-content-center">
+<form action="tambahCountry.php" method="post" role="form" id="form-add" enctype="multipart/form-data">
+    <input type="hidden" name="id" id="id">
+    <div class="mb-3">
+        <label for="country_name" class="form-label">Nama Country</label>
+        <input type="text" class="form-control" id="country_name" name="country_name" required>
+    </div>
+
+    <a href="index.php"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button></a>
+    <button type="submit" class="btn btn-primary text-white" name="btn-add" id="btn-add" form="form-add">Tambah</button>
+</form>
+</div>
+';
+
+$country->close();
+
+$view->replace('DATA_MAIN_TITLE', $mainTitle);
+$view->replace('DATA_FORM', $form);
+$view->write();
