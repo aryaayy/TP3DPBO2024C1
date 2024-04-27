@@ -4,6 +4,9 @@ Tugas Praktikum 3 dalam mata kuliah DPBO
 untuk keberkahanNya maka saya tidak melakukan kecurangan seperti yang telah dispesifikasikan. Aamiin.*
 
 ## Desain Program
+- Tabel/class Player: Berisi data pemain yang terdiri dari atribut id, name, realname, age, photo, team_id (fk), dan country_id (fk)
+- Tabel/class Team: Berisi data team valorant yang terdiri dari atribut id, code, dan name
+- Tabel/class Country: Berisi data negara yang terdiri dari atribut id dan name
 
 ## Alur Program
 1. Page home menampilkan data-data player secara singkat menggunakan card
